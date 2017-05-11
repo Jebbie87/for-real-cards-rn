@@ -31,9 +31,9 @@ export const StartOrJoinGameTabs = TabNavigator(
 
 export const Navigator = StackNavigator({
   Home: { screen: HomeScreen },
-  Login: { screen: Login },
   Register: { screen: Register },
   StartGame: { screen: StartGame },
   JoinGame: { screen: JoinGame },
   StartOrJoinGame: { screen: StartOrJoinGameTabs },
 });
+  // Login: { screen: Login },

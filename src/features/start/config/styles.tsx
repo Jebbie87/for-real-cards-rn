@@ -92,4 +92,23 @@ export default StyleSheet.create({
     fontSize: 20,
     color: 'red'
   },
+  fillBackground: {
+    backgroundColor: 'red',
+  },
+  registerButton: {
+    backgroundColor: 'red',
+    marginVertical: 10,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  homeButton: {
+    backgroundColor: 'red',
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  test: {
+    flex: 1,
+  },
 });

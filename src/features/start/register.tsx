@@ -20,6 +20,10 @@ interface State {
 const personIcon = require("../../../src/features/start/images/login1_person.png");
 
 export default class Register extends Component<Props, State> {
+  static navigationOptions = {
+    title: 'test',
+  };
+
   state = {
     id: '',
     password: '',
@@ -63,16 +67,18 @@ export default class Register extends Component<Props, State> {
                 secureTextEntry
               />
             </View>
+            <View>
             <TouchableOpacity activeOpacity={.5}>
-              <View>
-                <Text onPress={() => navigate('Login')} style={styles.buttonText}>Sign In</Text>
+              <View style={styles.registerButton}>
+                <Text style={styles.buttonText}>Register</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity activeOpacity={.5}>
-              <View>
-                <Text onPress={() => navigate('Home')} style={styles.buttonText}>Home</Text>
+            <TouchableOpacity style={styles.fillBackground} activeOpacity={.5} onPress={() => navigate('Home')}>
+              <View style={styles.homeButton}>
+                <Text style={styles.buttonText}>Home</Text>
               </View>
             </TouchableOpacity>
+            </View>
           </View>
       </View>
     )
