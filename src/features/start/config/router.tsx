@@ -6,6 +6,7 @@ import JoinGame from '../joinGame'
 import HomeScreen from '../home'
 import Login from '../login'
 import Register from '../register'
+import EditProfile from '../editProfile'
 
 const StartOrJoinGameTabsRouter = {
   StartGame: { screen: StartGame },
@@ -35,5 +36,6 @@ export const Navigator = StackNavigator({
   StartGame: { screen: StartGame },
   JoinGame: { screen: JoinGame },
   StartOrJoinGame: { screen: StartOrJoinGameTabs },
+  Edit: { screen: EditProfile },
 });
   // Login: { screen: Login },
