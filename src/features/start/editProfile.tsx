@@ -16,7 +16,7 @@ import Share from 'react-native-share'
 import RNFetchBlob from 'react-native-fetch-blob'
 
 interface Props {
-
+  navigation: any
 }
 
 interface State {
@@ -58,7 +58,7 @@ export default class Edit extends Component<Props, State> {
   share = () => {
     const image = this.state.photos[this.state.index].node.image.uri
     RNFetchBlob.fs.readFile(image, 'base64')
-    .then((data) => {
+    .then(data => {
       let shareOptions = {
         title: "React Native Share Example",
         message: "Check out this photo!",
@@ -67,18 +67,26 @@ export default class Edit extends Component<Props, State> {
       }
 
       Share.open(shareOptions)
-        .then((res) => console.log('res:', res))
+        .then(res => console.log('res:', res))
         .catch(err => console.log('err', err))
     })
   }
 
+  navigate = () => {
+    const { navigate } = this.props.navigation
+    navigate('ImageBrowser')
+  }
+
   render() {
-    console.log('state: ', this.state)
     return (
       <View style={styles.container}>
         <Button
           title='View Photos'
           onPress={() => { this.toggleModal(); this.getPhotos() }}
+        />
+        <Button
+          title='Browse images'
+          onPress={ this.navigate }
         />
         <Modal
           animationType={'slide'}

@@ -26,7 +26,7 @@ export default class HomeScreen extends Component<Props, State> {
           title="Login"
         />*/}
         <Button
-          onPress={() => navigate('Edit')}
+          onPress={() => navigate('EditProfileScreen')}
           title='Edit'
         />
         <Button
