@@ -111,4 +111,10 @@ export default StyleSheet.create({
   test: {
     flex: 1,
   },
+  errorText: {
+    textAlign: 'center',
+    marginBottom: 20,
+    fontSize: 20,
+    color: 'red'
+  },
 });

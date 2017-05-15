@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import {
   TextInput,
   View,
@@ -8,9 +10,18 @@ import {
   TouchableOpacity
 } from 'react-native';
 import styles from './config/styles'
+import {
+  Credentials,
+  ILoginState,
+  LoginActions,
+  LOGIN_PACKAGE_NAME
+} from 'common-app';
+import ConnectionStatus from './connection-status';
+import {renderLoginError} from './render-login-error';
 
 interface Props {
-  navigation: any
+  navigation: any,
+  commonAppLoginStatus: ILoginState
 }
 interface State {
   id: string,
@@ -18,16 +29,17 @@ interface State {
 }
 
 const personIcon = require("../../../src/features/start/images/login1_person.png");
+const mapStateToProps = (state) => {
+  return {
+    [LOGIN_PACKAGE_NAME]: state[LOGIN_PACKAGE_NAME]
+  }
+};
 
-export default class Register extends Component<Props, State> {
-  static navigationOptions = {
-    title: 'test',
-  };
-
+class _register extends Component<Props, State> {
   state = {
     id: '',
     password: '',
-  }
+  };
 
   idChange(id) {
     this.setState({ id })
@@ -37,11 +49,25 @@ export default class Register extends Component<Props, State> {
     this.setState({ password })
   }
 
+  register() {
+    let credentials = new Credentials(
+      this.state.id,
+      '',
+      this.state.password
+    );
+    LoginActions.register(credentials);
+  }
+
+  renderError() {
+    return renderLoginError(this.props[LOGIN_PACKAGE_NAME]);
+  }
+
   render() {
-    const { navigate } = this.props.navigation
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-          <View style={styles.wrapper}>
+        <ConnectionStatus/>
+        <View style={styles.wrapper}>
             <View style={styles.inputWrap}>
               <View style={styles.iconWrap}>
                 <Image source={personIcon} style={styles.icon} resizeMode="contain" />
@@ -69,8 +95,13 @@ export default class Register extends Component<Props, State> {
             </View>
             <View>
             <TouchableOpacity activeOpacity={.5}>
-              <View style={styles.registerButton}>
-                <Text style={styles.buttonText}>Register</Text>
+              <View style={styles.button}>
+                <Text onPress={() => this.register()} style={styles.buttonText}>Register</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity activeOpacity={.5}>
+              <View>
+                <Text onPress={() => navigate('Login')} style={styles.buttonText}>Sign In</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.fillBackground} activeOpacity={.5} onPress={() => navigate('Home')}>
@@ -79,8 +110,12 @@ export default class Register extends Component<Props, State> {
               </View>
             </TouchableOpacity>
             </View>
+            {this.renderError()}
           </View>
       </View>
     )
   }
 }
+
+const Register = connect(mapStateToProps)(_register);
+export default Register;

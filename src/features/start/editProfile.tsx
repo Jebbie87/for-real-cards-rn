@@ -25,6 +25,7 @@ interface State {
 
 let styles
 const { width } = Dimensions.get('window')
+const personIcon = require('../../../src/features/start/images/login1_person.png')
 
 export default class Edit extends Component<Props, State> {
 
@@ -32,6 +33,7 @@ export default class Edit extends Component<Props, State> {
     modalVisible: false,
     photos: [],
     index: null,
+    userPhoto: personIcon,
   }
 
   setIndex = (index) => {
@@ -40,6 +42,14 @@ export default class Edit extends Component<Props, State> {
     }
 
     this.setState({ index })
+  }
+
+  setPhoto = (userPhoto) => {
+    NativeModules.ReadImageData.readImage(uri, (image) => {
+      this.setState({ selected: image, });
+      console.log(image);
+    });
+    this.setState({ userPhoto })
   }
 
   getPhotos = () => {
@@ -53,7 +63,6 @@ export default class Edit extends Component<Props, State> {
   toggleModal = () => {
     this.setState({ modalVisible: !this.state.modalVisible })
   }
-
 
   share = () => {
     const image = this.state.photos[this.state.index].node.image.uri
@@ -80,6 +89,9 @@ export default class Edit extends Component<Props, State> {
   render() {
     return (
       <View style={styles.container}>
+        <Image
+          source={this.state.userPhoto}
+        />
         <Button
           title='View Photos'
           onPress={() => { this.toggleModal(); this.getPhotos() }}
@@ -113,6 +125,7 @@ export default class Edit extends Component<Props, State> {
                       <Image
                         style={styles.imageSizer}
                         source={{ uri: p.node.image.uri }}
+                        onPress={() => this.setPhoto(p.node.image.uri) }
                       />
                     </TouchableHighlight>
                   )

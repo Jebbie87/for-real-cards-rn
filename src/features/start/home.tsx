@@ -21,10 +21,10 @@ export default class HomeScreen extends Component<Props, State> {
     return (
       <View style={styles.container}>
         <Text style={styles.welcomeTitle}>Welcome to ForRealCards</Text>
-        {/*<Button
+        <Button
           onPress={() => navigate('Login')}
           title="Login"
-        />*/}
+        />
         <Button
           onPress={() => navigate('EditProfileScreen')}
           title='Edit'

@@ -40,8 +40,8 @@ export const Navigator = StackNavigator({
   Home: { screen: HomeScreen },
   Register: { screen: Register },
   StartGame: { screen: StartGame },
+  Login: { screen: Login },
   JoinGame: { screen: JoinGame },
   StartOrJoinGame: { screen: StartOrJoinGameTabs },
   EditProfileScreen: { screen: EditProfileScreen },
 });
-  // Login: { screen: Login },
