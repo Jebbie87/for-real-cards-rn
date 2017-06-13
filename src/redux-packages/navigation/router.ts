@@ -1,18 +1,16 @@
-import React from 'react'
-import { TabNavigator, StackNavigator } from 'react-navigation'
+import { TabNavigator, addNavigationHelpers, StackNavigator } from 'react-navigation'
 
-import StartGame from '../startGame'
-import JoinGame from '../joinGame'
-import HomeScreen from '../home'
-import Login from '../login'
-import Register from '../register'
-import EditProfile from '../editProfile'
-import ImageBrowser from '../imageBrowser'
+import StartGame from '../../features/start/startGame';
+import JoinGame from '../../features/start/joinGame';
+import HomeScreen from '../../features/start/home';
+import Login from '../../features/start/login';
+import Register from '../../features/start/register';
+
 
 const StartOrJoinGameTabsRouter = {
   StartGame: { screen: StartGame },
   joinGame: { screen: JoinGame },
-}
+};
 
 const StartOrJoinGameTabsConfig = {
   tabBarPosition: 'top',
@@ -24,24 +22,18 @@ const StartOrJoinGameTabsConfig = {
       marginBottom: 13,
     }
   }
-}
-
-const EditProfileScreen = StackNavigator({
-  Edit: { screen: EditProfile },
-  ImageBrowser: { screen: ImageBrowser },
-})
+};
 
 export const StartOrJoinGameTabs = TabNavigator(
   StartOrJoinGameTabsRouter,
   StartOrJoinGameTabsConfig
-)
+);
 
-export const Navigator = StackNavigator({
+export const AppNavigator = StackNavigator({
   Home: { screen: HomeScreen },
+  Login: { screen: Login },
   Register: { screen: Register },
   StartGame: { screen: StartGame },
-  Login: { screen: Login },
   JoinGame: { screen: JoinGame },
   StartOrJoinGame: { screen: StartOrJoinGameTabs },
-  EditProfileScreen: { screen: EditProfileScreen },
 });
